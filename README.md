@@ -56,7 +56,7 @@ If you're looking for something you can grow with, contribute to, and never pay 
 - Git (for submodules)
 
 ```bash
-git clone --recurse-submodules https://github.com/yourusername/BODY.git
+git clone --recurse-submodules https://github.com/AustinLambdin/BODY.git
 cd BODY
 cmake -B build
 cmake --build build
@@ -118,6 +118,6 @@ Just don't remove the license header. That's it.
 
 ## About
 
-BODY is built and maintained by [Austin](https://github.com/yourusername) — a DevSecOps engineer, music producer, and firm believer that the tools for making music should belong to everyone.
+BODY is built and maintained by [Austin](https://github.com/AustinLambdin) — a DevSecOps engineer, music producer, and firm believer that the tools for making music should belong to everyone.
 
 *Bringing Open Development to You.*
