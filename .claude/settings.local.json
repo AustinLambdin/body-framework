@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git submodule:*)",
+      "Bash(cmake:*)",
+      "Bash(ctest:*)",
+      "Bash(./build/tests/body_tests:*)"
+    ]
+  }
+}
