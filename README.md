@@ -38,17 +38,17 @@ BODY is not a wrapper around another framework. It is built from scratch, with m
 
 ## What BODY Is Not
 
-BODY is not finished. This is an early, honest, actively developed project. The framework grows alongside the plugins being built with it — which means every feature exists because a real plugin needed it.
+BODY is young. The core vision — write once, export everywhere, with a real parameter system, GUI toolkit, and DSP library — is complete and working. But there's always more to build: more components, more platform backends, more real-world battle-testing.
 
-If you're looking for a production-ready, fully documented, battle-tested framework right now — JUCE exists. We're not pretending otherwise.
+If you're looking for a mature, decade-old ecosystem — JUCE exists. We're not pretending otherwise.
 
-If you're looking for something you can grow with, contribute to, and never pay a licensing fee for — you're in the right place.
+If you're looking for something modern, growing, and completely free to use — you're in the right place.
 
 ---
 
 ## Getting Started
 
-> Full setup guide coming in `docs/getting-started.md`
+See the [Getting Started](docs/getting-started.md) guide for a full walkthrough.
 
 **Requirements:**
 - C++20 compatible compiler (Clang 13+, GCC 11+, MSVC 2022+)
@@ -69,14 +69,19 @@ cmake --build build
 ```
 BODY/
 ├── body/
-│   ├── core/         # Parameters, processor base, MIDI
-│   ├── gui/          # Component system
-│   ├── dsp/          # DSP utilities
+│   ├── core/         # Parameters, processor base, MIDI, state
+│   ├── gui/          # Component system, platform views
+│   ├── dsp/          # Oscillator, filters, envelope, FFT
 │   └── formats/      # VST3, AU, CLAP wrappers
 ├── examples/
-│   └── GainPlugin/   # Start here
+│   ├── GainPlugin/   # Minimal effect plugin — start here
+│   └── SynthPlugin/  # Subtractive synth — demonstrates DSP
+├── tests/            # Catch2 unit + integration tests
 ├── third_party/      # SDKs as git submodules
 └── docs/
+    ├── getting-started.md
+    ├── dsp-guide.md
+    └── gui-guide.md
 ```
 
 ---
@@ -84,16 +89,17 @@ BODY/
 ## Roadmap
 
 - [x] Repo initialized
-- [ ] CMake build system + submodules
-- [ ] CLAP wrapper (first format target)
-- [ ] Core parameter system
-- [ ] Audio processor base class
-- [ ] GainPlugin example (validates the whole stack)
-- [ ] VST3 wrapper
-- [ ] AU wrapper
-- [ ] GUI component system
-- [ ] DSP utility library
-- [ ] Documentation site
+- [x] CMake build system + submodules
+- [x] CLAP wrapper (first format target)
+- [x] Core parameter system
+- [x] Audio processor base class
+- [x] GainPlugin example (validates the whole stack)
+- [x] VST3 wrapper
+- [x] AU wrapper
+- [x] GUI component system
+- [x] DSP utility library
+- [x] SynthPlugin example (validates DSP library)
+- [x] Documentation site
 
 ---
 

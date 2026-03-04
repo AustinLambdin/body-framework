@@ -23,6 +23,11 @@ out/
 # macOS
 .DS_Store
 
+# Plugin build artifacts
+*.clap
+*.vst3
+*.component
+
 # Misc
 *.swp
 *.swo
