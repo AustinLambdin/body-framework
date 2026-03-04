@@ -162,7 +162,7 @@ TEST_CASE("Integration: State round-trip", "[integration]") {
     REQUIRE(plugin.bypassParam_->getValue() == true);
 }
 
-TEST_CASE("Integration: Audio flow — unity and silence", "[integration]") {
+TEST_CASE("Integration: Audio flow - unity and silence", "[integration]") {
     TestPlugin plugin;
     plugin.prepare(44100.0, 512);
 
