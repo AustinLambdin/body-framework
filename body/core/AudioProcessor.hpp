@@ -6,6 +6,7 @@
 #include "BusLayout.hpp"
 #include "ParameterGroup.hpp"
 #include "ProcessContext.hpp"
+#include "body/gui/PluginEditor.hpp"
 #include <functional>
 #include <memory>
 #include <string>
@@ -13,7 +14,6 @@
 namespace body {
 
 class AudioProcessor;
-class PluginEditor;
 
 /// @brief Factory function type for creating AudioProcessor instances
 using AudioProcessorFactory = std::function<std::unique_ptr<AudioProcessor>()>;
@@ -50,7 +50,7 @@ public:
     [[nodiscard]] const ParameterGroup& getParameters() const { return parameters_; }
 
     // Editor — override to provide a GUI
-    [[nodiscard]] virtual std::unique_ptr<PluginEditor> createEditor() { return nullptr; }
+    [[nodiscard]] virtual std::unique_ptr<PluginEditor> createEditor();
 
     // Bus layout — override to customize
     [[nodiscard]] virtual BusLayout getDefaultBusLayout() const;
