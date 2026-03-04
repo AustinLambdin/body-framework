@@ -2,6 +2,7 @@
 // Copyright (c) 2025 BODY Framework Contributors
 
 #include "AudioProcessor.hpp"
+#include "body/gui/PluginEditor.hpp"
 
 namespace body {
 
