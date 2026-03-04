@@ -50,7 +50,7 @@ public:
     [[nodiscard]] const ParameterGroup& getParameters() const { return parameters_; }
 
     // Editor — override to provide a GUI
-    [[nodiscard]] virtual std::unique_ptr<PluginEditor> createEditor();
+    [[nodiscard]] virtual std::unique_ptr<PluginEditor> createEditor() { return nullptr; }
 
     // Bus layout — override to customize
     [[nodiscard]] virtual BusLayout getDefaultBusLayout() const;

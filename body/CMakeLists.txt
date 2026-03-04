@@ -60,9 +60,8 @@ add_library(body_clap STATIC
 )
 if(APPLE)
     target_sources(body_clap PRIVATE formats/clap/ClapGuiExtension.mm)
-    target_link_libraries(body_clap PUBLIC body::gui)
 endif()
-target_link_libraries(body_clap PUBLIC body::core clap)
+target_link_libraries(body_clap PUBLIC body::core body::gui clap)
 add_library(body::clap ALIAS body_clap)
 
 # --- body::vst3 (STATIC, guarded by BODY_ENABLE_VST3) ---
@@ -74,9 +73,8 @@ if(BODY_ENABLE_VST3)
     )
     if(APPLE)
         target_sources(body_vst3 PRIVATE formats/vst3/Vst3EditorView.mm)
-        target_link_libraries(body_vst3 PUBLIC body::gui)
     endif()
-    target_link_libraries(body_vst3 PUBLIC body::core sdk)
+    target_link_libraries(body_vst3 PUBLIC body::core body::gui sdk)
     target_include_directories(body_vst3 PUBLIC
         ${CMAKE_SOURCE_DIR}/third_party/vst3sdk
     )
