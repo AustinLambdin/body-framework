@@ -2,7 +2,7 @@
 // Copyright (c) 2025 BODY Framework Contributors
 
 #include "GainPlugin.hpp"
-#include "body/formats/clap/ClapEntry.hpp"
+#include "GainEditor.hpp"
 #include <cmath>
 
 GainPlugin::GainPlugin() {
@@ -39,13 +39,7 @@ void GainPlugin::reset() {
     targetGain_ = currentGain_;
 }
 
-BODY_REGISTER_CLAP_PLUGIN(
-    GainPlugin,
-    "com.body-framework.gain",
-    "Gain",
-    "BODY Examples",
-    "1.0.0",
-    "Simple gain plugin",
-    CLAP_PLUGIN_FEATURE_AUDIO_EFFECT,
-    CLAP_PLUGIN_FEATURE_UTILITY
-)
+std::unique_ptr<body::PluginEditor> GainPlugin::createEditor() {
+    return std::make_unique<GainEditor>(*this, *gainParam_, *bypassParam_);
+}
+

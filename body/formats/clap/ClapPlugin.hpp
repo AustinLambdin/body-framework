@@ -5,14 +5,14 @@
 
 #include "body/core/AudioProcessor.hpp"
 #include <clap/clap.h>
-#include <functional>
 #include <memory>
 #include <string>
 
-namespace body {
+#if defined(__APPLE__)
+namespace body { class PlatformViewMac; }
+#endif
 
-/// @brief Factory function type for creating AudioProcessor instances
-using AudioProcessorFactory = std::function<std::unique_ptr<AudioProcessor>()>;
+namespace body {
 
 /// @brief Bridges a body::AudioProcessor to the CLAP plugin lifecycle
 ///
@@ -36,6 +36,8 @@ public:
     [[nodiscard]] AudioProcessor* getProcessor() noexcept { return processor_.get(); }
     [[nodiscard]] const AudioProcessor* getProcessor() const noexcept { return processor_.get(); }
 
+    friend class ClapExtensions;
+
 private:
     ClapPlugin(const Registration& reg, const clap_host_t* host);
 
@@ -58,6 +60,10 @@ private:
     clap_plugin_t plugin_ = {};
     double sampleRate_ = 44100.0;
     uint32_t maxFrames_ = 0;
+
+#if defined(__APPLE__)
+    std::unique_ptr<PlatformViewMac> platformView_;
+#endif
 };
 
 } // namespace body

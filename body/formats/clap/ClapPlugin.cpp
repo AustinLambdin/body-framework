@@ -5,6 +5,10 @@
 #include "ClapExtensions.hpp"
 #include <cstring>
 
+#if defined(__APPLE__)
+#include "body/gui/platform/mac/PlatformViewMac.hpp"
+#endif
+
 namespace body {
 
 ClapPlugin::ClapPlugin(const Registration& reg, const clap_host_t* host)
@@ -189,6 +193,12 @@ const void* ClapPlugin::clapGetExtension(const clap_plugin_t* /*plugin*/, const 
         return ClapExtensions::getAudioPortsExtension();
     if (strcmp(id, CLAP_EXT_NOTE_PORTS) == 0)
         return ClapExtensions::getNotePortsExtension();
+    if (strcmp(id, CLAP_EXT_STATE) == 0)
+        return ClapExtensions::getStateExtension();
+#if defined(__APPLE__)
+    if (strcmp(id, CLAP_EXT_GUI) == 0)
+        return ClapExtensions::getGuiExtension();
+#endif
     return nullptr;
 }
 

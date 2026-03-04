@@ -3,6 +3,7 @@
 
 #include "ClapExtensions.hpp"
 #include "ClapPlugin.hpp"
+#include "body/core/StateSerializer.hpp"
 #include <cstring>
 
 namespace body {
@@ -199,6 +200,45 @@ bool ClapExtensions::notePortsGet(const clap_plugin_t* /*plugin*/, uint32_t inde
     info->name[CLAP_NAME_SIZE - 1] = '\0';
 
     return true;
+}
+
+// --- State Extension ---
+
+const clap_plugin_state_t* ClapExtensions::getStateExtension() {
+    static const clap_plugin_state_t ext = {
+        stateSave,
+        stateLoad
+    };
+    return &ext;
+}
+
+bool ClapExtensions::stateSave(const clap_plugin_t* plugin, const clap_ostream_t* stream) {
+    auto* proc = ClapPlugin::fromPlugin(plugin)->getProcessor();
+    auto data = StateSerializer::serialize(proc->getParameters());
+
+    size_t offset = 0;
+    while (offset < data.size()) {
+        auto written = stream->write(stream, data.data() + offset,
+                                     static_cast<uint32_t>(data.size() - offset));
+        if (written <= 0) return false;
+        offset += static_cast<size_t>(written);
+    }
+    return true;
+}
+
+bool ClapExtensions::stateLoad(const clap_plugin_t* plugin, const clap_istream_t* stream) {
+    std::vector<uint8_t> data;
+    uint8_t buffer[4096];
+
+    for (;;) {
+        auto bytesRead = stream->read(stream, buffer, sizeof(buffer));
+        if (bytesRead < 0) return false;
+        if (bytesRead == 0) break;
+        data.insert(data.end(), buffer, buffer + bytesRead);
+    }
+
+    auto* proc = ClapPlugin::fromPlugin(plugin)->getProcessor();
+    return StateSerializer::deserialize(proc->getParameters(), data.data(), data.size());
 }
 
 } // namespace body

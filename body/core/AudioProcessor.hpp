@@ -6,9 +6,17 @@
 #include "BusLayout.hpp"
 #include "ParameterGroup.hpp"
 #include "ProcessContext.hpp"
+#include <functional>
+#include <memory>
 #include <string>
 
 namespace body {
+
+class AudioProcessor;
+class PluginEditor;
+
+/// @brief Factory function type for creating AudioProcessor instances
+using AudioProcessorFactory = std::function<std::unique_ptr<AudioProcessor>()>;
 
 /// @brief Base class that all BODY plugins inherit from
 ///
@@ -40,6 +48,9 @@ public:
     // Parameter access
     [[nodiscard]] ParameterGroup& getParameters() { return parameters_; }
     [[nodiscard]] const ParameterGroup& getParameters() const { return parameters_; }
+
+    // Editor — override to provide a GUI
+    [[nodiscard]] virtual std::unique_ptr<PluginEditor> createEditor() { return nullptr; }
 
     // Bus layout — override to customize
     [[nodiscard]] virtual BusLayout getDefaultBusLayout() const;

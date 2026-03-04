@@ -5,6 +5,8 @@
 
 #include "body/core/AudioProcessor.hpp"
 
+namespace body { class PluginEditor; }
+
 /// @brief Simple gain plugin — validates the entire BODY stack
 class GainPlugin : public body::AudioProcessor {
 public:
@@ -17,6 +19,8 @@ public:
     void prepare(double sampleRate, int maxBlockSize) override;
     void processBlock(body::ProcessContext& context) override;
     void reset() override;
+
+    [[nodiscard]] std::unique_ptr<body::PluginEditor> createEditor() override;
 
 private:
     body::FloatParameter* gainParam_ = nullptr;

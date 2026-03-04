@@ -8,7 +8,7 @@ jobs:
         with:
           submodules: recursive
       - name: Configure
-        run: cmake -B build -DBODY_BUILD_TESTS=ON -DBODY_BUILD_EXAMPLES=ON
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DBODY_BUILD_TESTS=ON -DBODY_BUILD_EXAMPLES=ON
       - name: Build
         run: cmake --build build --config Release
       - name: Test
